@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8">
+    <title>セマンティックネット</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+  </head>
+  <body>
+    <div class="container">
+      <h3>セマンティックネット</h3>
+      <table class="table table-bordered">
+	<thead class="thead-dark">
+	  <tr>
+	    <th>Tail Node<br/>(主語)</th>
+	    <th>Link<br/>(述語)</th>
+	    <th>Head Node<br/>(目的語)</th>
+	  </tr>
+	</thead>
+	<tbody>
+	  <tr th:each="link : ${sn.getLinks()}">
+	    <td th:text="${link.getTail()}"></td>
+	    <td th:text="${link.getLabel()}"></td>
+	    <td th:text="${link.getHead()}"></td>
+	  </tr>
+	</tbody>
+      </table>
+
+      <h3>質問（Query）</h3>
+      <form action="/semnet" method="post">
+	<div class="form-group">
+	  <textarea class="form-control" name="queryStr" rows="4" th:text="${query}"></textarea>
+	</div>
+	<button class="btn btn-primary" type="submit">
+	  質問を実行
+	</button>
+      </form>
+
+      <h3>結果：</h3>
+      <p th:text="${result}"></p>
+    </div>
+  </body>
+</html>
